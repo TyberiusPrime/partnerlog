@@ -28,6 +28,10 @@ jobs:
 
       - name: Restore debug keystore
         run: |
+          if [ -z "${{ secrets.PARTNERLOG_DEBUG_KEYSTORE_BASE64 }}" ]; then
+            echo "Missing PARTNERLOG_DEBUG_KEYSTORE_BASE64 secret." >&2
+            exit 1
+          fi
           mkdir -p signing
           echo "${{ secrets.PARTNERLOG_DEBUG_KEYSTORE_BASE64 }}" | base64 --decode > signing/debug.keystore
 
