@@ -7,3 +7,4 @@ CI workflows:
 - Release workflow builds and uploads a debug APK and attaches it to the GitHub release.
 
 APK signing uses a repository-stored debug keystore (`/signing/debug.keystore`) so builds stay upgrade-compatible.
+This key is for debug APKs only and must not be reused for production signing. Passwords can be overridden with `partnerlogDebugKeystorePassword` and `partnerlogDebugKeyPassword` Gradle properties in CI secrets if desired.
