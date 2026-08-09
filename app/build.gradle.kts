@@ -1,8 +1,10 @@
 apply(plugin = "com.android.application")
 apply(plugin = "org.jetbrains.kotlin.android")
 
-val debugKeystorePassword = (findProperty("partnerlogDebugKeystorePassword") as String?) ?: "android"
-val debugKeyPassword = (findProperty("partnerlogDebugKeyPassword") as String?) ?: "android"
+val debugKeystorePassword = (findProperty("partnerlogDebugKeystorePassword") as String?)
+    ?: error("Missing Gradle property: partnerlogDebugKeystorePassword")
+val debugKeyPassword = (findProperty("partnerlogDebugKeyPassword") as String?)
+    ?: error("Missing Gradle property: partnerlogDebugKeyPassword")
 
 android {
     namespace = "com.tyberiusprime.partnerlog"

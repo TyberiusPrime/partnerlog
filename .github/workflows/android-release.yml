@@ -27,6 +27,9 @@ jobs:
           sdkmanager "platforms;android-34" "build-tools;34.0.0"
 
       - name: Build debug APK
+        env:
+          ORG_GRADLE_PROJECT_partnerlogDebugKeystorePassword: android
+          ORG_GRADLE_PROJECT_partnerlogDebugKeyPassword: android
         run: ./gradlew assembleDebug
 
       - name: Upload debug APK artifact
