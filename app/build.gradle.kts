@@ -26,10 +26,6 @@ android {
         getByName("debug") {
             signingConfig = signingConfigs.getByName("partnerlogDebug")
         }
-        getByName("release") {
-            isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("partnerlogDebug")
-        }
     }
 
     compileOptions {

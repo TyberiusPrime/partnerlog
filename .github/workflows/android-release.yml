@@ -26,17 +26,17 @@ jobs:
         run: |
           sdkmanager "platforms;android-34" "build-tools;34.0.0"
 
-      - name: Build release APK
-        run: ./gradlew assembleRelease
+      - name: Build debug APK
+        run: ./gradlew assembleDebug
 
-      - name: Upload release APK artifact
+      - name: Upload debug APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: partnerlog-release-apk
-          path: app/build/outputs/apk/release/*.apk
+          name: partnerlog-debug-apk
+          path: app/build/outputs/apk/debug/*.apk
 
       - name: Attach APK to release
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
-          files: app/build/outputs/apk/release/*.apk
+          files: app/build/outputs/apk/debug/*.apk
