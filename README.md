@@ -1,4 +1,4 @@
-# partnerlog
+# PartnerLog
 
 Minimal Android app (v0) with one screen containing a title and an Exit button.
 
