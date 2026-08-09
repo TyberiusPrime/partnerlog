@@ -1,6 +1,9 @@
 apply(plugin = "com.android.application")
 apply(plugin = "org.jetbrains.kotlin.android")
 
+val debugKeystorePassword = (findProperty("partnerlogDebugKeystorePassword") as String?) ?: "android"
+val debugKeyPassword = (findProperty("partnerlogDebugKeyPassword") as String?) ?: "android"
+
 android {
     namespace = "com.tyberiusprime.partnerlog"
     compileSdk = 34
@@ -16,9 +19,9 @@ android {
     signingConfigs {
         create("partnerlogDebug") {
             storeFile = file("../signing/debug.keystore")
-            storePassword = "android"
+            storePassword = debugKeystorePassword
             keyAlias = "partnerlogdebug"
-            keyPassword = "android"
+            keyPassword = debugKeyPassword
         }
     }
 
