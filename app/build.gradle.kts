@@ -1,10 +1,8 @@
 apply(plugin = "com.android.application")
 apply(plugin = "org.jetbrains.kotlin.android")
 
-val debugKeystorePassword = (findProperty("partnerlogDebugKeystorePassword") as String?)
-    ?: error("Missing Gradle property: partnerlogDebugKeystorePassword")
-val debugKeyPassword = (findProperty("partnerlogDebugKeyPassword") as String?)
-    ?: error("Missing Gradle property: partnerlogDebugKeyPassword")
+val debugKeystorePassword = providers.gradleProperty("partnerlogDebugKeystorePassword").orElse("android")
+val debugKeyPassword = providers.gradleProperty("partnerlogDebugKeyPassword").orElse("android")
 
 android {
     namespace = "com.tyberiusprime.partnerlog"
@@ -21,9 +19,9 @@ android {
     signingConfigs {
         create("partnerlogDebug") {
             storeFile = file("../signing/debug.keystore")
-            storePassword = debugKeystorePassword
+            storePassword = debugKeystorePassword.get()
             keyAlias = "partnerlogdebug"
-            keyPassword = debugKeyPassword
+            keyPassword = debugKeyPassword.get()
         }
     }
 
