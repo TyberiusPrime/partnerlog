@@ -1,4 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
+import org.gradle.api.GradleException
 import org.gradle.api.JavaVersion
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
@@ -26,12 +27,12 @@ configure<ApplicationExtension> {
     signingConfigs {
         create("partnerlogDebug") {
             val signingDirKeystore = rootProject.file("signing/debug.keystore")
-            val rootKeystore = rootProject.file("debug.keystore")
-
-            storeFile = when {
-                signingDirKeystore.exists() -> signingDirKeystore
-                rootKeystore.exists() -> rootKeystore
-                else -> signingDirKeystore
+            storeFile = if (signingDirKeystore.exists()) {
+                signingDirKeystore
+            } else {
+                throw GradleException(
+                    "Missing signing/debug.keystore. Restore it from CI secrets or create a local debug keystore at /home/runner/work/partnerlog/partnerlog/signing/debug.keystore."
+                )
             }
             storePassword = debugKeystorePassword.get()
             keyAlias = "partnerlogdebug"
