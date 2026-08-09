@@ -12,6 +12,6 @@ This key is for debug APKs only and must not be reused for production signing. C
 - `PARTNERLOG_DEBUG_KEYSTORE_PASSWORD`
 - `PARTNERLOG_DEBUG_KEY_PASSWORD`
 
-For local builds, create or copy the same debug keystore to `signing/debug.keystore` at the project root before running Gradle.
+For local builds, create or copy the same debug keystore to `signing/debug.keystore` at the project root if you want to use the same signing identity as CI. Without it, local debug builds fall back to the standard Android debug keystore.
 
 Note: PR builds require these secrets, so fork-originated PRs will fail unless you adapt the workflow for fork-safe signing.
