@@ -26,6 +26,11 @@ jobs:
         run: |
           sdkmanager "platforms;android-34" "build-tools;34.0.0"
 
+      - name: Restore debug keystore
+        run: |
+          mkdir -p signing
+          echo "${{ secrets.PARTNERLOG_DEBUG_KEYSTORE_BASE64 }}" | base64 --decode > signing/debug.keystore
+
       - name: Build debug APK
         env:
           ORG_GRADLE_PROJECT_partnerlogDebugKeystorePassword: ${{ secrets.PARTNERLOG_DEBUG_KEYSTORE_PASSWORD }}
@@ -42,5 +47,4 @@ jobs:
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.event.release.tag_name }}
           files: app/build/outputs/apk/debug/*.apk
