@@ -31,7 +31,7 @@ configure<ApplicationExtension> {
                 signingDirKeystore
             } else {
                 throw GradleException(
-                    "Missing signing/debug.keystore. Restore it from CI secrets or create a local debug keystore at /home/runner/work/partnerlog/partnerlog/signing/debug.keystore."
+                    "Missing signing/debug.keystore. Restore it from CI secrets or create a local debug keystore at signing/debug.keystore from the project root."
                 )
             }
             storePassword = debugKeystorePassword.get()
