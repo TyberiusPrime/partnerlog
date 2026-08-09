@@ -28,12 +28,9 @@ jobs:
         run: |
           sdkmanager "platforms;android-34" "build-tools;34.0.0"
 
-      - name: Restore debug keystore
+      - name: Restore debug keystore (when configured)
+        if: ${{ secrets.PARTNERLOG_DEBUG_KEYSTORE_BASE64 != '' }}
         run: |
-          if [ -z "${{ secrets.PARTNERLOG_DEBUG_KEYSTORE_BASE64 }}" ]; then
-            echo "Missing PARTNERLOG_DEBUG_KEYSTORE_BASE64 secret. Fork PRs do not receive repository secrets." >&2
-            exit 1
-          fi
           mkdir -p signing
           echo "${{ secrets.PARTNERLOG_DEBUG_KEYSTORE_BASE64 }}" | base64 --decode > signing/debug.keystore
 

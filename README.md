@@ -14,4 +14,4 @@ This key is for debug APKs only and must not be reused for production signing. C
 
 For local builds, create or copy the same debug keystore to `signing/debug.keystore` at the project root if you want to use the same signing identity as CI. Without it, local debug builds fall back to the standard Android debug keystore.
 
-Note: PR builds require these secrets, so fork-originated PRs will fail unless you adapt the workflow for fork-safe signing.
+Note: PR builds can run without these secrets and will fall back to the standard Android debug keystore, but only repository-owned runs with the configured secrets will produce the stable signing identity used for upgrade-compatible APKs.
