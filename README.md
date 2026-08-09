@@ -11,3 +11,5 @@ This key is for debug APKs only and must not be reused for production signing. C
 - `PARTNERLOG_DEBUG_KEYSTORE_BASE64` (base64 of the debug keystore file)
 - `PARTNERLOG_DEBUG_KEYSTORE_PASSWORD`
 - `PARTNERLOG_DEBUG_KEY_PASSWORD`
+
+Note: PR builds require these secrets, so fork-originated PRs will fail unless you adapt the workflow for fork-safe signing.
