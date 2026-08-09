@@ -1,5 +1,7 @@
-apply(plugin = "com.android.application")
-apply(plugin = "org.jetbrains.kotlin.android")
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+}
 
 val debugKeystorePassword = providers.gradleProperty("partnerlogDebugKeystorePassword").orElse("android")
 val debugKeyPassword = providers.gradleProperty("partnerlogDebugKeyPassword").orElse("android")
@@ -18,7 +20,14 @@ android {
 
     signingConfigs {
         create("partnerlogDebug") {
-            storeFile = file("../signing/debug.keystore")
+            val signingDirKeystore = rootProject.file("signing/debug.keystore")
+            val rootKeystore = rootProject.file("debug.keystore")
+
+            storeFile = when {
+                signingDirKeystore.exists() -> signingDirKeystore
+                rootKeystore.exists() -> rootKeystore
+                else -> signingDirKeystore
+            }
             storePassword = debugKeystorePassword.get()
             keyAlias = "partnerlogdebug"
             keyPassword = debugKeyPassword.get()
